@@ -3,39 +3,39 @@
 /*                                                        :::      ::::::::   */
 /*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: halmuhis <halmuhis@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: halmuhis <halmuhis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/10 16:33:20 by halmuhis          #+#    #+#             */
-/*   Updated: 2025/02/07 17:17:34 by halmuhis         ###   ########.fr       */
+/*   Created: 2025/02/12 05:03:25 by halmuhis          #+#    #+#             */
+/*   Updated: 2025/02/12 05:08:59 by halmuhis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "stack.h"
-
-int	ft_atoi(const char *nptr)
+static int	ft_isspace(char c)
 {
-	int	i;
-	int	result;
-	int	sign;
+	return (c == ' ' || c == '\n' || c == '\t'
+		|| c == '\v' || c == '\f' || c == '\r');
+}
 
-	i = 0;
-	sign = 1;
+long	ft_atoi(char *str)
+{
+	long	result;
+	long	sign;
+	int		i;
+
 	result = 0;
-	while (nptr[i] == 32 || (nptr[i] >= 9 && nptr[i] <= 13))
+	sign = 1;
+	i = 0;
+	while (ft_isspace(str[i]))
 		i++;
-	if (nptr[i] == '-')
+	if (str[i] == '-' || str[i] == '+')
 	{
-		sign *= -1;
+		if (str[i] == '-')
+			sign = -1;
 		i++;
 	}
-	else if (nptr[i] == '+')
-		i++;
-	if (nptr[i] == '+' || nptr[i] == '-')
-		return (0);
-	while (nptr[i] != '\0' && nptr[i] >= '0' && nptr[i] <= '9')
+	while (str[i] >= '0' && str[i] <= '9')
 	{
-		result *= 10;
-		result += nptr[i] - '0';
+		result = result * 10 + (str[i] - '0');
 		i++;
 	}
 	return (result * sign);

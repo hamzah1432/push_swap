@@ -3,14 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   stack_operations.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: halmuhis <halmuhis@student.42.fr>          +#+  +:+       +#+        */
+/*   By: halmuhis <halmuhis@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 21:01:15 by halmuhis          #+#    #+#             */
-/*   Updated: 2025/01/18 09:46:55 by halmuhis         ###   ########.fr       */
+/*   Updated: 2025/02/20 07:06:32 by halmuhis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "stack.h"
+#include "../include/stack.h"
 
 /* Function to swap the first two elements at the top of stack */
 void swap_stack(t_stack *stack_a)

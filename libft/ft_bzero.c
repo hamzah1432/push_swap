@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strlen.c                                        :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: halmuhis <halmuhis@student.42amman.com>    +#+  +:+       +#+        */
+/*   By: halmuhis <halmuhis@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/10 16:50:00 by halmuhis          #+#    #+#             */
-/*   Updated: 2025/02/08 14:18:27 by halmuhis         ###   ########.fr       */
+/*   Created: 2024/09/10 16:33:28 by halmuhis          #+#    #+#             */
+/*   Updated: 2024/09/10 16:33:29 by halmuhis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "stack.h"
+#include "libft.h"
 
-size_t	ft_strlen(char const *s)
+void	*ft_bzero(void *s, size_t n)
 {
 	size_t	i;
 
 	i = 0;
-	while (s[i])
+	while (i < n)
+	{
+		((char *)s)[i] = 0;
 		i++;
-	return (i);
+	}
+	return (s);
 }

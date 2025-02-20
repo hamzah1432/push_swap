@@ -1,30 +1,34 @@
-# Variables
 NAME = push_swap
 CC = cc
 CFLAGS = -Wall -Wextra -Werror
-SRC = $(wildcard *.c)       # Automatically includes all .c files in the directory
-OBJ = $(SRC:.c=.o)          # Object files generated from source files
+SRC_DIR = src
+INC_DIR = include
+LIBFT_PATH = ./libft
+LIBFT = $(LIBFT_PATH)/libft.a
 
-# Rules
+SRCS = $(wildcard $(SRC_DIR)/*.c)
+OBJS = $(SRCS:.c=.o)
+HEADER = $(INC_DIR)/stack.h
+
 all: $(NAME)
 
-$(NAME): $(OBJ)
-	@$(CC) $(CFLAGS) -o $(NAME) $(OBJ)
+$(LIBFT):
+	$(MAKE) -C $(LIBFT_PATH)
 
-%.o: %.c
-	@$(CC) $(CFLAGS) -c $< -o $@
+$(NAME): $(LIBFT) $(OBJS)
+	$(CC) $(CFLAGS) $(OBJS) -L$(LIBFT_PATH) -lft -o $(NAME)
 
-compile: $(NAME)
-	@./push_swap
-	@$(MAKE) fclean > /dev/null  # Hide the output of fclean
+%.o: %.c $(HEADER)
+	$(CC) $(CFLAGS) -I$(INC_DIR) -I$(LIBFT_PATH) -c $< -o $@
 
 clean:
-	rm -f $(OBJ)
+	$(MAKE) -C $(LIBFT_PATH) clean
+	rm -f $(OBJS)
 
 fclean: clean
-	rm -f $(NAME)
+	@$(MAKE) -C $(LIBFT_PATH) fclean
+	@rm -f $(NAME)
 
 re: fclean all
 
-
-.PHONY: all clean fclean re bonus
+.PHONY: all clean fclean re

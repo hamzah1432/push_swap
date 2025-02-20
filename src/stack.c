@@ -1,5 +1,5 @@
 // stack.c
-#include "stack.h"
+#include "../include/stack.h"
 
 
 t_stack *init_stack() {
@@ -37,16 +37,3 @@ int peek(t_node *node) {
         return -1; // Stack is empty
     return node->value;
 }
-
-void free_stack(t_stack *stack) {
-    t_node *current = stack->top;
-    t_node *next_node;
-
-    while (current) {
-        next_node = current->next;
-        free(current);
-        current = next_node;
-    }
-    free(stack);
-}
-

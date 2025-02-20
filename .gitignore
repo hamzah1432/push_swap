@@ -1,1 +1,7 @@
-*.json
+.vscode
+*.o
+*.out
+*.txt
+*.a
+get_next_line
+test
