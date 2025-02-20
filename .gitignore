@@ -3,5 +3,5 @@
 *.out
 *.txt
 *.a
-get_next_line
+push_swap
 test
