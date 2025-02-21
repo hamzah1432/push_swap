@@ -6,7 +6,7 @@
 /*   By: halmuhis <halmuhis@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 16:33:14 by halmuhis          #+#    #+#             */
-/*   Updated: 2025/02/20 08:00:53 by halmuhis         ###   ########.fr       */
+/*   Updated: 2025/02/21 11:26:28 by halmuhis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,6 +91,8 @@ void	validate_input(char *argv)
 	str = ft_split(argv, ' ');
 	if (!str)
 		exit_with_error(NULL, "Memory allocation failed");
+	if (!str || !str[0])
+		exit_with_error(str, "empty argument");
 	i = -1;
 	while (str[++i])
 	{
