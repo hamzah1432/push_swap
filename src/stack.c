@@ -6,7 +6,7 @@
 /*   By: halmuhis <halmuhis@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 08:12:31 by halmuhis          #+#    #+#             */
-/*   Updated: 2025/02/20 08:12:32 by halmuhis         ###   ########.fr       */
+/*   Updated: 2025/02/20 10:29:37 by halmuhis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,19 +24,20 @@ t_stack	*ft_init_stack(void)
 	return (stack);
 }
 
-void	ft_push(t_stack *stack, int value)
+int	ft_push(t_stack *stack, int value)
 {
 	t_node	*new_node;
 
 	if (!stack)
-		return ;
+		return (0);
 	new_node = (t_node *)malloc(sizeof(t_node));
 	if (!new_node)
-		return ;
+		return (0);
 	new_node->value = value;
 	new_node->next = stack->top;
 	stack->top = new_node;
 	stack->size++;
+	return (1);
 }
 
 int	ft_pop(t_stack *stack)
