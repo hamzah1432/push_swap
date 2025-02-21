@@ -6,7 +6,7 @@
 /*   By: halmuhis <halmuhis@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 21:01:15 by halmuhis          #+#    #+#             */
-/*   Updated: 2025/02/20 08:13:21 by halmuhis         ###   ########.fr       */
+/*   Updated: 2025/02/21 19:49:35 by halmuhis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,18 +29,20 @@ void	ft_swap_stack(t_stack *stack_a)
 }
 
 /* Function to push the top element of second_s onto first_s */
-void	ft_push_stack(t_stack *first_s, t_stack *second_s, char ab)
+int	ft_push_stack(t_stack *first_s, t_stack *second_s, char ab)
 {
 	int	value;
 
 	if (!first_s || !second_s || second_s->size == 0)
-		return ;
+		return (0);
 	value = ft_pop(second_s);
-	ft_push(first_s, value);
+	if (ft_push(first_s, value) == 0)
+		return (0);
 	if (ab == 'b')
 		write(1, "pb\n", 3);
 	else
 		write(1, "pa\n", 3);
+	return (1);
 }
 
 /* Shift up all elements by 1. The first element becomes the last one. */

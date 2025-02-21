@@ -6,7 +6,7 @@
 /*   By: halmuhis <halmuhis@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 16:33:14 by halmuhis          #+#    #+#             */
-/*   Updated: 2025/02/21 11:26:28 by halmuhis         ###   ########.fr       */
+/*   Updated: 2025/02/21 19:40:06 by halmuhis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,15 +74,6 @@ static int	check_duplicates(char **str)
 	return (1);
 }
 
-static void	exit_with_error(char **str, char *msg)
-{
-	if (str)
-		free_split(str);
-	ft_putendl_fd("Error with validation", 2);
-	ft_putendl_fd(msg, 2);
-	exit(EXIT_FAILURE);
-}
-
 void	validate_input(char *argv)
 {
 	char	**str;
@@ -90,18 +81,18 @@ void	validate_input(char *argv)
 
 	str = ft_split(argv, ' ');
 	if (!str)
-		exit_with_error(NULL, "Memory allocation failed");
+		exit_validate_error(NULL, "Memory allocation failed");
 	if (!str || !str[0])
-		exit_with_error(str, "empty argument");
+		exit_validate_error(str, "empty argument");
 	i = -1;
 	while (str[++i])
 	{
 		if (!is_valid_number(str[i]))
-			exit_with_error(str, "Invalid number format");
+			exit_validate_error(str, "Invalid number format");
 		else if (!check_int_limits(str[i]))
-			exit_with_error(str, "Out of integer range");
+			exit_validate_error(str, "Out of integer range");
 	}
 	if (!check_duplicates(str))
-		exit_with_error(str, "Duplicate numbers found");
+		exit_validate_error(str, "Duplicate numbers found");
 	free_split(str);
 }

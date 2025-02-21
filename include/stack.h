@@ -6,7 +6,7 @@
 /*   By: halmuhis <halmuhis@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 10:00:00 by halmuhis          #+#    #+#             */
-/*   Updated: 2025/02/21 11:19:46 by halmuhis         ###   ########.fr       */
+/*   Updated: 2025/02/21 19:52:21 by halmuhis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 # include <stdlib.h>
 # include <unistd.h>
 # include <time.h>
-#include <limits.h>
+# include <limits.h>
 # include "../libft/libft.h"
 
 typedef struct s_node
@@ -46,10 +46,10 @@ int		ft_peek(t_node *stack);
 int		ft_search_stack(t_stack *stack, int target);
 int		ft_stack_len(t_stack *stack);
 int		ft_find_max(t_stack *stack);
-int	ft_find_prev(t_stack *stack, int num);
+int		ft_find_prev(t_stack *stack, int num);
 
 /* Stack manipulation operations */
-void	ft_push_stack(t_stack *first_s, t_stack *second_s, char ab);
+int		ft_push_stack(t_stack *first_s, t_stack *second_s, char ab);
 void	ft_swap_stack(t_stack *stack_a);
 void	ft_rotate_stack(t_stack *stack_a, char ab);
 void	ft_reverse_rotate_stack(t_stack *stack_a, char ab);
@@ -58,9 +58,15 @@ void	ft_reverse_rotate_stack(t_stack *stack_a, char ab);
 void	free_split(char **str);
 void	free_stack(t_stack *stack);
 
+/* error handling */
+void	exit_validate_error(char **str, char *msg);
+void	exit_main_error(char **str, t_stack **a, t_stack **b, char *msg);
+void	exit_sorting_error(t_stack **a, t_stack **b, char *msg);
+
 /* Input validation */
 void	validate_input(char *argv);
 
-void sorting(t_stack **a, t_stack **b);
+/* Sorting */
+void	sorting(t_stack **a, t_stack **b);
 
 #endif
