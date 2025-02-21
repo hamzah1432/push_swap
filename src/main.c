@@ -6,7 +6,7 @@
 /*   By: halmuhis <halmuhis@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 19:34:21 by halmuhis          #+#    #+#             */
-/*   Updated: 2025/02/21 19:55:46 by halmuhis         ###   ########.fr       */
+/*   Updated: 2025/02/21 21:48:31 by halmuhis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ int	main(int argc, char *argv[])
 	validate_input(argv[1]);
 	fill_stack(argv[1], &stack_a, &stack_b);
 	sorting(&stack_a, &stack_b);
-	print_stack(stack_b, 'b');
+	// print_stack(stack_b, 'b');
 	free_stack(stack_a);
 	free_stack(stack_b);
 	return (0);
