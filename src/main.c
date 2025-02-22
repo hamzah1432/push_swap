@@ -6,27 +6,74 @@
 /*   By: halmuhis <halmuhis@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 19:34:21 by halmuhis          #+#    #+#             */
-/*   Updated: 2025/02/22 19:46:59 by halmuhis         ###   ########.fr       */
+/*   Updated: 2025/02/23 02:27:46 by halmuhis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/stack.h"
 
-void	print_stack(t_stack *stack, char ab)
-{
-	t_node	*cur;
+// void	print_stack(t_stack *stack, char ab)
+// {
+// 	t_node	*cur;
 
-	if (!stack || stack->size == 0)
+// 	if (!stack || stack->size == 0)
+// 	{
+// 		ft_putendl_fd("Stack is empty.", 1);
+// 		return ;
+// 	}
+// 	cur = stack->top;
+// 	while (cur)
+// 	{
+// 		printf("Top of stack_%c: %d \n", ab, cur->value);
+// 		cur = cur->next;
+// 	}
+// }
+
+static int	*calculate_normalized_values(t_stack *stack)
+{
+	t_node	*current;
+	t_node	*compare;
+	int		*normalized;
+	int		i;
+
+	normalized = (int *)malloc(sizeof(int) * stack->size);
+	if (!normalized)
+		return (NULL);
+	i = 0;
+	current = stack->top;
+	while (current)
 	{
-		ft_putendl_fd("Stack is empty.", 1);
+		normalized[i] = 0;
+		compare = stack->top;
+		while (compare)
+		{
+			if (current->value > compare->value)
+				normalized[i]++;
+			compare = compare->next;
+		}
+		current = current->next;
+		i++;
+	}
+	return (normalized);
+}
+
+static void	normalize_stack(t_stack *stack)
+{
+	t_node	*current;
+	int		*normalized;
+	int		i;
+
+	normalized = calculate_normalized_values(stack);
+	if (!normalized)
 		return ;
-	}
-	cur = stack->top;
-	while (cur)
+	current = stack->top;
+	i = 0;
+	while (current)
 	{
-		printf("Top of stack_%c: %d \n", ab, cur->value);
-		cur = cur->next;
+		current->value = normalized[i++];
+		current = current->next;
 	}
+	free(normalized);
 }
 
 static void	fill_stack(char *argv, t_stack **a, t_stack **b)
@@ -62,8 +109,8 @@ int	main(int argc, char *argv[])
 	}
 	validate_input(argv[1]);
 	fill_stack(argv[1], &stack_a, &stack_b);
+	normalize_stack(stack_a);
 	sorting(&stack_a, &stack_b);
-	print_stack(stack_a, 'a');
 	free_stack(stack_a);
 	free_stack(stack_b);
 	return (0);
