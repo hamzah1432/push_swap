@@ -6,7 +6,7 @@
 /*   By: halmuhis <halmuhis@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 19:34:21 by halmuhis          #+#    #+#             */
-/*   Updated: 2025/02/23 02:27:46 by halmuhis         ###   ########.fr       */
+/*   Updated: 2025/02/23 13:25:39 by halmuhis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ static int	*calculate_normalized_values(t_stack *stack)
 	return (normalized);
 }
 
-static void	normalize_stack(t_stack *stack)
+static void	normalize_stack(t_stack *stack, t_stack *stackb)
 {
 	t_node	*current;
 	int		*normalized;
@@ -65,7 +65,7 @@ static void	normalize_stack(t_stack *stack)
 
 	normalized = calculate_normalized_values(stack);
 	if (!normalized)
-		return ;
+		exit_main_error(NULL, &stack, &stackb, "Memory allocation failed");
 	current = stack->top;
 	i = 0;
 	while (current)
@@ -109,7 +109,7 @@ int	main(int argc, char *argv[])
 	}
 	validate_input(argv[1]);
 	fill_stack(argv[1], &stack_a, &stack_b);
-	normalize_stack(stack_a);
+	normalize_stack(stack_a, stack_b);
 	sorting(&stack_a, &stack_b);
 	free_stack(stack_a);
 	free_stack(stack_b);
