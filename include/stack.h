@@ -6,7 +6,7 @@
 /*   By: halmuhis <halmuhis@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 10:00:00 by halmuhis          #+#    #+#             */
-/*   Updated: 2025/02/21 21:35:14 by halmuhis         ###   ########.fr       */
+/*   Updated: 2025/02/23 02:17:15 by halmuhis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,6 @@ t_stack	*ft_init_stack(void);
 int		ft_push(t_stack *stack, int value);
 int		ft_pop(t_stack *stack);
 int		ft_peek(t_node *stack);
-int		ft_search_stack(t_stack *stack, int target);
-int		ft_find_max(t_stack *stack);
-int		ft_find_min(t_stack *stack);
-int		ft_find_prev(t_stack *stack, int num, char status);
-int		ft_find_median(t_stack *stack);
 
 /* Stack manipulation operations */
 int		ft_push_stack(t_stack *first_s, t_stack *second_s, char ab);

@@ -6,7 +6,7 @@
 /*   By: halmuhis <halmuhis@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/21 19:38:56 by halmuhis          #+#    #+#             */
-/*   Updated: 2025/02/21 19:44:47 by halmuhis         ###   ########.fr       */
+/*   Updated: 2025/02/23 13:24:40 by halmuhis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ void	exit_validate_error(char **str, char *msg)
 
 void	exit_main_error(char **str, t_stack **a, t_stack **b, char *msg)
 {
-	if (str)
+	if (str && str != NULL)
 		free_split(str);
 	if (*a)
 		free_stack(*a);
