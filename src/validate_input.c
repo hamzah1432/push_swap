@@ -6,51 +6,57 @@
 /*   By: halmuhis <halmuhis@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 16:33:14 by halmuhis          #+#    #+#             */
-/*   Updated: 2025/02/21 19:40:06 by halmuhis         ###   ########.fr       */
+/*   Updated: 2025/02/25 20:55:33 by halmuhis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../include/stack.h"
 
-static int	is_valid_number(char *str)
+static int	is_valid_number(char *argv)
 {
 	int	i;
 
 	i = 0;
-	if (str[i] == '-' || str[i] == '+')
+	if (argv[i] == '-' || argv[i] == '+')
 		i++;
-	if (!str[i])
+	if (!argv[i])
 		return (0);
-	while (str[i])
+	while (argv[i])
 	{
-		if (!ft_isdigit(str[i]))
+		if (!ft_isdigit(argv[i]))
 			return (0);
 		i++;
 	}
 	return (1);
 }
 
-static int	check_int_limits(char *str)
+static int	check_int_limits(char *argv)
 {
-	size_t	len;
+	long	num;
+	int		sign;
+	int		i;
 
-	len = ft_strlen(str);
-	if (len > 11)
-		return (0);
-	if (len == 10 && str[0] != '-' && str[0] != '+')
+	num = 0;
+	sign = 1;
+	i = 0;
+	if (argv[i] == '-' || argv[i] == '+')
 	{
-		if (ft_strncmp(str, "2147483647", 10) > 0)
-			return (0);
+		if (argv[i] == '-')
+			sign = -1;
+		i++;
 	}
-	else if (len == 11 && str[0] == '-')
+	while (argv[i])
 	{
-		if (ft_strncmp(str, "-2147483648", 11) > 0)
+		num = (num * 10) + (argv[i] - '0');
+		if ((sign == 1 && num > INT_MAX) || (i > 14)
+			|| (sign == -1 && num * sign < INT_MIN))
 			return (0);
+		i++;
 	}
 	return (1);
 }
 
-static int	check_duplicates(char **str)
+static int	check_duplicates(char *argv[])
 {
 	int	i;
 	int	j;
@@ -58,13 +64,13 @@ static int	check_duplicates(char **str)
 	int	num2;
 
 	i = 0;
-	while (str[i])
+	while (argv[i])
 	{
-		num1 = ft_atoi(str[i]);
+		num1 = ft_atoi(argv[i]);
 		j = i + 1;
-		while (str[j])
+		while (argv[j])
 		{
-			num2 = ft_atoi(str[j]);
+			num2 = ft_atoi(argv[j]);
 			if (num1 == num2)
 				return (0);
 			j++;
@@ -74,25 +80,18 @@ static int	check_duplicates(char **str)
 	return (1);
 }
 
-void	validate_input(char *argv)
+void	validate_input(char *argv[])
 {
-	char	**str;
 	int		i;
 
-	str = ft_split(argv, ' ');
-	if (!str)
-		exit_validate_error(NULL, "Memory allocation failed");
-	if (!str || !str[0])
-		exit_validate_error(str, "empty argument");
-	i = -1;
-	while (str[++i])
+	i = 0;
+	while (argv[++i])
 	{
-		if (!is_valid_number(str[i]))
-			exit_validate_error(str, "Invalid number format");
-		else if (!check_int_limits(str[i]))
-			exit_validate_error(str, "Out of integer range");
+		if (!is_valid_number(argv[i]))
+			exit_validate_error("Invalid number format");
+		else if (!check_int_limits(argv[i]))
+			exit_validate_error("Out of integer range");
 	}
-	if (!check_duplicates(str))
-		exit_validate_error(str, "Duplicate numbers found");
-	free_split(str);
+	if (!check_duplicates(argv))
+		exit_validate_error("Duplicate numbers found");
 }

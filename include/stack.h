@@ -6,7 +6,7 @@
 /*   By: halmuhis <halmuhis@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 10:00:00 by halmuhis          #+#    #+#             */
-/*   Updated: 2025/02/23 02:17:15 by halmuhis         ###   ########.fr       */
+/*   Updated: 2025/02/25 21:00:44 by halmuhis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,12 +55,12 @@ void	free_split(char **str);
 void	free_stack(t_stack *stack);
 
 /* error handling */
-void	exit_validate_error(char **str, char *msg);
-void	exit_main_error(char **str, t_stack **a, t_stack **b, char *msg);
+void	exit_validate_error(char *msg);
+void	exit_main_error(t_stack **a, t_stack **b, char *msg);
 void	exit_sorting_error(t_stack **a, t_stack **b, char *msg);
 
 /* Input validation */
-void	validate_input(char *argv);
+void	validate_input(char *argv[]);
 
 /* Sorting */
 void	sorting(t_stack **a, t_stack **b);
