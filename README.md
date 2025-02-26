@@ -36,8 +36,8 @@
   
 - **Examples of valid input:**
   ```
-  ./push_swap "1 2 3 4 5"
-  ./push_swap "-123 45 67 -89"
+  ./push_swap 1 2 3 4 5
+  ./push_swap -123 45 67 -89
   ```
 
 - **Invalid inputs (will display "Error"):**
