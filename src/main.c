@@ -6,7 +6,7 @@
 /*   By: halmuhis <halmuhis@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 19:34:21 by halmuhis          #+#    #+#             */
-/*   Updated: 2025/02/25 21:02:16 by halmuhis         ###   ########.fr       */
+/*   Updated: 2025/02/26 16:09:14 by halmuhis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -87,7 +87,7 @@ static void	fill_stack(char *argv[], t_stack **a, t_stack **b)
 	i = 0;
 	while (argv[i])
 		i++;
-	while (--i >= 0 && argv[i])
+	while (--i >= 1 && argv[i])
 	{
 		if (!ft_push(*a, ft_atoi(argv[i])))
 			exit_main_error(a, b, "Memory allocation failed");
