@@ -6,7 +6,7 @@
 /*   By: halmuhis <halmuhis@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 10:00:00 by halmuhis          #+#    #+#             */
-/*   Updated: 2025/02/21 21:35:14 by halmuhis         ###   ########.fr       */
+/*   Updated: 2025/02/28 16:48:20 by halmuhis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,11 +43,6 @@ t_stack	*ft_init_stack(void);
 int		ft_push(t_stack *stack, int value);
 int		ft_pop(t_stack *stack);
 int		ft_peek(t_node *stack);
-int		ft_search_stack(t_stack *stack, int target);
-int		ft_find_max(t_stack *stack);
-int		ft_find_min(t_stack *stack);
-int		ft_find_prev(t_stack *stack, int num, char status);
-int		ft_find_median(t_stack *stack);
 
 /* Stack manipulation operations */
 int		ft_push_stack(t_stack *first_s, t_stack *second_s, char ab);
@@ -60,14 +55,15 @@ void	free_split(char **str);
 void	free_stack(t_stack *stack);
 
 /* error handling */
-void	exit_validate_error(char **str, char *msg);
-void	exit_main_error(char **str, t_stack **a, t_stack **b, char *msg);
+void	exit_validate_error(char *msg);
+void	exit_main_error(t_stack **a, t_stack **b, char *msg);
 void	exit_sorting_error(t_stack **a, t_stack **b, char *msg);
 
 /* Input validation */
-void	validate_input(char *argv);
+void	validate_input(char *argv[]);
 
 /* Sorting */
 void	sorting(t_stack **a, t_stack **b);
+void	small_sort(t_stack **a, t_stack **b);
 
 #endif

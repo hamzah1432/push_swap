@@ -6,7 +6,7 @@
 /*   By: halmuhis <halmuhis@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/02 19:34:21 by halmuhis          #+#    #+#             */
-/*   Updated: 2025/02/21 21:48:31 by halmuhis         ###   ########.fr       */
+/*   Updated: 2025/02/28 16:53:45 by halmuhis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,25 +29,69 @@ void	print_stack(t_stack *stack, char ab)
 	}
 }
 
-static void	fill_stack(char *argv, t_stack **a, t_stack **b)
+static int	*calculate_normalized_values(t_stack *stack)
 {
-	char	**str;
+	t_node	*current;
+	t_node	*compare;
+	int		*normalized;
+	int		i;
+
+	normalized = (int *)malloc(sizeof(int) * stack->size);
+	if (!normalized)
+		return (NULL);
+	i = 0;
+	current = stack->top;
+	while (current)
+	{
+		normalized[i] = 0;
+		compare = stack->top;
+		while (compare)
+		{
+			if (current->value > compare->value)
+				normalized[i]++;
+			compare = compare->next;
+		}
+		current = current->next;
+		i++;
+	}
+	return (normalized);
+}
+
+static void	normalize_stack(t_stack *stack, t_stack *stackb)
+{
+	t_node	*current;
+	int		*normalized;
+	int		i;
+
+	normalized = calculate_normalized_values(stack);
+	if (!normalized)
+		exit_main_error(&stack, &stackb, "Memory allocation failed");
+	current = stack->top;
+	i = 0;
+	while (current)
+	{
+		current->value = normalized[i++];
+		current = current->next;
+	}
+	free(normalized);
+}
+
+static void	fill_stack(char *argv[], t_stack **a, t_stack **b)
+{
 	int		i;
 
 	*a = ft_init_stack();
 	*b = ft_init_stack();
-	str = ft_split(argv, ' ');
-	if (!str || !*a || !*b)
-		exit_main_error(str, a, b, "Memory allocation failed");
+	if (!*a || !*b)
+		exit_main_error(a, b, "Memory allocation failed");
 	i = 0;
-	while (str[i])
+	while (argv[i])
 		i++;
-	while (--i >= 0 && str[i])
+	while (--i >= 1 && argv[i])
 	{
-		if (!ft_push(*a, ft_atoi(str[i])))
-			exit_main_error(str, a, b, "Memory allocation failed");
+		if (!ft_push(*a, ft_atoi(argv[i])))
+			exit_main_error(a, b, "Memory allocation failed");
 	}
-	free_split(str);
 }
 
 int	main(int argc, char *argv[])
@@ -55,15 +99,13 @@ int	main(int argc, char *argv[])
 	t_stack	*stack_a;
 	t_stack	*stack_b;
 
-	if (argc != 2)
-	{
-		ft_putendl_fd("Error", 2);
-		return (1);
-	}
-	validate_input(argv[1]);
-	fill_stack(argv[1], &stack_a, &stack_b);
+	if (argc == 1)
+		return (0);
+	validate_input(argv);
+	fill_stack(argv, &stack_a, &stack_b);
+	normalize_stack(stack_a, stack_b);
 	sorting(&stack_a, &stack_b);
-	// print_stack(stack_b, 'b');
+	print_stack(stack_a, 'a');
 	free_stack(stack_a);
 	free_stack(stack_b);
 	return (0);
