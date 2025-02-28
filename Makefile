@@ -1,34 +1,36 @@
-NAME = push_swap
-CC = cc
-CFLAGS = -Wall -Wextra -Werror
-SRC_DIR = src
-INC_DIR = include
-LIBFT_PATH = ./libft
-LIBFT = $(LIBFT_PATH)/libft.a
+NAME		=	push_swap
+CC		=	cc
+CFLAGS		=	-Wall -Wextra -Werror
+RM		=	rm -f
 
-SRCS = $(wildcard $(SRC_DIR)/*.c)
-OBJS = $(SRCS:.c=.o)
-HEADER = $(INC_DIR)/stack.h
+SRCS		=	$(wildcard src/*.c)
+OBJS		=	$(SRCS:.c=.o)
 
-all: $(NAME)
+LIBFT_DIR	=	./libft
+LIBFT		=	$(LIBFT_DIR)/libft.a
+INCLUDES	=	-I include -I $(LIBFT_DIR)
+
+$(NAME):	$(LIBFT) $(OBJS)
+		$(CC) $(CFLAGS) $(OBJS) -L$(LIBFT_DIR) -lft -o $(NAME)
 
 $(LIBFT):
-	$(MAKE) -C $(LIBFT_PATH)
+		@make -C $(LIBFT_DIR)
 
-$(NAME): $(LIBFT) $(OBJS)
-	$(CC) $(CFLAGS) $(OBJS) -L$(LIBFT_PATH) -lft -o $(NAME)
+%.o: %.c include/stack.h
+		$(CC) $(CFLAGS) $(INCLUDES) -c $< -o $@
 
-%.o: %.c $(HEADER)
-	$(CC) $(CFLAGS) -I$(INC_DIR) -I$(LIBFT_PATH) -c $< -o $@
+all:		$(NAME)
 
 clean:
-	$(MAKE) -C $(LIBFT_PATH) clean
-	rm -f $(OBJS)
+		@make -C $(LIBFT_DIR) clean
+		$(RM) $(OBJS)
 
-fclean: clean
-	@$(MAKE) -C $(LIBFT_PATH) fclean
-	@rm -f $(NAME)
+fclean:		clean
+		@make -C $(LIBFT_DIR) fclean
+		$(RM) $(NAME)
 
-re: fclean all
+re:		fclean all
 
-.PHONY: all clean fclean re
+bonus:		all
+
+.PHONY:		all clean fclean re bonus
