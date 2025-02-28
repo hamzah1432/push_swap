@@ -12,18 +12,6 @@
 
 #include "../include/stack.h"
 
-static void	handle_small_sort(t_stack **stack_a)
-{
-	if ((*stack_a)->size <= 1)
-		return ;
-	if ((*stack_a)->size == 2)
-	{
-		if ((*stack_a)->top->value > (*stack_a)->top->next->value)
-			ft_swap_stack(*stack_a);
-		return ;
-	}
-}
-
 static int	get_max_bits(t_stack *stack)
 {
 	t_node	*current;
@@ -73,8 +61,10 @@ static void	radix_sort(t_stack *a, t_stack *b)
 
 void	sorting(t_stack **stack_a, t_stack **stack_b)
 {
-	handle_small_sort(stack_a);
-	if ((*stack_a)->size <= 2)
+	if ((*stack_a)->size <= 5)
+	{
+		small_sort(stack_a, stack_b);
 		return ;
+	}
 	radix_sort(*stack_a, *stack_b);
 }
