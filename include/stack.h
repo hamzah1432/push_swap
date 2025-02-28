@@ -6,7 +6,7 @@
 /*   By: halmuhis <halmuhis@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/08/20 10:00:00 by halmuhis          #+#    #+#             */
-/*   Updated: 2025/02/25 21:00:44 by halmuhis         ###   ########.fr       */
+/*   Updated: 2025/02/28 16:48:20 by halmuhis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,5 +64,6 @@ void	validate_input(char *argv[]);
 
 /* Sorting */
 void	sorting(t_stack **a, t_stack **b);
+void	small_sort(t_stack **a, t_stack **b);
 
 #endif
