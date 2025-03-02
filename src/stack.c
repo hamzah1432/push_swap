@@ -6,7 +6,7 @@
 /*   By: halmuhis <halmuhis@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/20 08:12:31 by halmuhis          #+#    #+#             */
-/*   Updated: 2025/02/20 10:29:37 by halmuhis         ###   ########.fr       */
+/*   Updated: 2025/03/02 13:28:53 by halmuhis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,4 +60,20 @@ int	ft_peek(t_node *node)
 	if (!node)
 		return (-1);
 	return (node->value);
+}
+
+int	is_sorted(t_stack *stack)
+{
+	t_node	*current;
+
+	if (!stack || !stack->top)
+		return (1);
+	current = stack->top;
+	while (current->next)
+	{
+		if (current->value > current->next->value)
+			return (0);
+		current = current->next;
+	}
+	return (1);
 }

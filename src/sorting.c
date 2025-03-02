@@ -42,7 +42,7 @@ static void	radix_sort(t_stack *a, t_stack *b)
 	size = a->size;
 	max_bits = get_max_bits(a);
 	i = 0;
-	while (i < max_bits)
+	while (i < max_bits && !is_sorted(a))
 	{
 		j = 0;
 		while (j < size)

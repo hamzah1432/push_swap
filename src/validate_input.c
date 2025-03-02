@@ -6,7 +6,7 @@
 /*   By: halmuhis <halmuhis@student.42amman.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/07 16:33:14 by halmuhis          #+#    #+#             */
-/*   Updated: 2025/02/25 20:55:33 by halmuhis         ###   ########.fr       */
+/*   Updated: 2025/03/02 13:21:43 by halmuhis         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -92,6 +92,6 @@ void	validate_input(char *argv[])
 		else if (!check_int_limits(argv[i]))
 			exit_validate_error("Out of integer range");
 	}
-	if (!check_duplicates(argv))
+	if (!check_duplicates(++argv))
 		exit_validate_error("Duplicate numbers found");
 }
